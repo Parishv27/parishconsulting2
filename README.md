@@ -85,9 +85,30 @@ opt-in but the tags must be gated: load them only after consent, add the matchin
 to `page_load_consent_levels` / `notice_banner_purposes_levels`, and add a row to the
 cookie table in `site/cookie-policy.html`.
 
-`site/cookie-policy.html` describes what the site actually loads. It is a factual
-disclosure, not legal advice, and has not been reviewed by an attorney. Have counsel review
-it before launch.
+## Legal pages
+
+Three pages, all sharing the `.legal` styles in `site/css/style.css` (no per-page CSS):
+
+| Page | Covers |
+|---|---|
+| `site/privacy-policy.html` | What is and is not collected, the mailto form, Vercel server logs, third parties, rights, children, retention |
+| `site/terms-of-service.html` | Site use, no-professional-advice, no engagement without a signed agreement, published pricing as estimates not quotes, IP including the 3-Phase Impact Model, Amazon links, warranties, liability, Mississippi governing law |
+| `site/cookie-policy.html` | The single consent cookie and the third-party file loads |
+
+All three are linked from the site footer; the consent banner links to the privacy policy.
+They are indexable and listed in `sitemap.xml`.
+
+**These are drafts, not legal advice, and no attorney has reviewed them.** Each page carries
+a visible "Note for the site owner" box listing what counsel must confirm. Across the three,
+the open items are: a business mailing address if one should be published; the actual
+retention period for client correspondence; whether any specific state or international
+privacy law applies to the client base; confirmation that Mississippi is the correct
+governing law and venue; whether the 3-Phase Impact Model IP claim matches any trademark
+filing; and whether an arbitration or dispute-resolution clause is wanted, which is
+deliberately omitted. Remove the note boxes once counsel signs off.
+
+Keep them accurate: any new service added to the site (analytics, a real form backend, a
+chat widget, embedded video) changes what these pages must disclose.
 
 ## Known items
 

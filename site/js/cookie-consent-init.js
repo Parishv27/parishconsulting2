@@ -27,6 +27,6 @@
     /* Must be absolute: the widget runs isValidUrl() and silently drops a
        relative path. Built from origin so it follows localhost, the Vercel
        preview, and the eventual production domain without editing. */
-    website_privacy_policy_url: window.location.origin + '/cookie-policy.html'
+    website_privacy_policy_url: window.location.origin + '/privacy-policy.html'
   });
 })();
