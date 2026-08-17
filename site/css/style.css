@@ -272,6 +272,18 @@ section{padding:clamp(4rem, 9vw, 7.5rem) 0;position:relative}
 }
 .book-card h3{font-size:1.12rem;margin-bottom:.7rem;line-height:1.25}
 .book-card p{font-size:.94rem;color:var(--muted);margin-bottom:1.3rem;flex:1}
+.book-price{
+  display:block;font-family:var(--serif);font-weight:700;color:var(--gold);
+  font-size:1.25rem;margin-bottom:.9rem;
+}
+.resources{background:var(--sand)}
+.resources .book-card{background:var(--paper)}
+.resources-note{margin-top:2.2rem;font-size:.94rem;color:var(--muted)}
+.resources-note a{
+  color:var(--navy);font-weight:700;
+  display:inline-block;padding:.6rem .1rem;margin:-.4rem 0;
+  border-bottom:2px solid var(--gold);text-decoration:none;
+}
 .book-link{
   align-self:flex-start;display:inline-flex;align-items:center;gap:.45em;
   min-height:44px;padding:.5rem 0;
