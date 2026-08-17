@@ -57,6 +57,38 @@ python -m http.server 8765
    poster frame. On phones and for reduced-motion users the video hides and the static
    portrait returns. To swap the clip, replace the mp4 and regenerate the poster.
 
+## Cookie consent
+
+TermsFeed Cookie Consent 4.2.0, **self-hosted** at
+`site/vendor/cookie-consent/cookie-consent-code.js`. Config lives in
+`site/js/cookie-consent-init.js`; brand styling is at the end of `site/css/style.css`.
+
+TermsFeed's normal install is a small loader script that pulls the widget from their CDN
+and also pings `termsfeed.com` with your visitor's hostname on every page load. The real
+widget file is served here instead, so displaying the banner makes no third-party request.
+The tradeoff is that updates are manual: to upgrade, re-download
+`https://www.termsfeed.com/public/cookie-consent/<version>/cookie-consent-code.js`.
+
+Two config values are load-bearing and easy to break:
+
+- `notice_banner_insert_legal_urls: true` is required or the widget accepts
+  `website_privacy_policy_url` and silently renders no link.
+- `website_privacy_policy_url` must be **absolute**. The widget runs `isValidUrl()` and
+  drops a relative path without warning. It is built from `window.location.origin`, so it
+  follows localhost, the Vercel URL, and the production domain with no edit.
+- `notice_banner_purposes_levels: ['strictly-necessary']` narrows the banner blurb. The
+  vendor default claims the site measures interest and personalizes marketing, which is
+  untrue here.
+
+**If analytics are ever added** (Google Analytics, Meta Pixel, etc.), the banner is already
+opt-in but the tags must be gated: load them only after consent, add the matching category
+to `page_load_consent_levels` / `notice_banner_purposes_levels`, and add a row to the
+cookie table in `site/cookie-policy.html`.
+
+`site/cookie-policy.html` describes what the site actually loads. It is a factual
+disclosure, not legal advice, and has not been reviewed by an attorney. Have counsel review
+it before launch.
+
 ## Known items
 
 - The footer emblem uses the reversed logo variant (navy remapped to ivory) supplied in

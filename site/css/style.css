@@ -479,6 +479,11 @@ section{padding:clamp(4rem, 9vw, 7.5rem) 0;position:relative}
   border-top:1px solid rgba(209,225,250,.14);padding-top:1.8rem;
   display:flex;flex-direction:column;gap:.8rem;align-items:center;text-align:center;
 }
+.footer-bottom .legal-links a{
+  font-size:12px;letter-spacing:.08em;color:var(--pale);opacity:.85;
+  text-decoration:none;display:inline-block;padding:.7rem .2rem;margin:-.4rem 0;
+}
+.footer-bottom .legal-links a:hover{color:var(--gold-soft);opacity:1}
 .footer-bottom .credit{font-size:12px;letter-spacing:.08em;color:var(--pale);opacity:.85}
 .footer-bottom .credit a{
   color:var(--gold-soft);font-weight:700;text-decoration:none;
@@ -575,6 +580,54 @@ section{padding:clamp(4rem, 9vw, 7.5rem) 0;position:relative}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{
   outline:3px solid var(--gold);outline-offset:2px;
 }
+
+/* ============================================================
+   Cookie consent (TermsFeed 4.2.0) rebranded to the site palette.
+   Selectors are the widget's own, read from the shipped bundle.
+   !important is required: the widget injects its own stylesheet at runtime.
+   ============================================================ */
+.termsfeed-com---nb{
+  font-family:var(--sans)!important;
+  border-top:3px solid var(--gold)!important;
+  box-shadow:0 -10px 40px rgba(10,31,68,.16)!important;
+}
+.termsfeed-com---palette-light.termsfeed-com---nb{
+  background:var(--paper)!important;color:var(--ink)!important;
+}
+.termsfeed-com---nb .cc-nb-title{
+  font-family:var(--serif)!important;color:var(--navy)!important;font-size:1.15rem!important;
+}
+.termsfeed-com---nb .cc-nb-text{color:var(--muted)!important;font-size:.95rem!important}
+.termsfeed-com---nb .cc-nb-okagree,
+.termsfeed-com---nb .cc-nb-reject,
+.termsfeed-com---nb .cc-nb-changep{
+  font-family:var(--sans)!important;font-weight:900!important;
+  letter-spacing:.04em!important;border-radius:var(--radius)!important;
+  min-height:44px!important;padding:.8rem 1.5rem!important;
+}
+.termsfeed-com---palette-light .cc-nb-okagree{
+  background:var(--navy)!important;color:var(--paper)!important;
+}
+.termsfeed-com---palette-light .cc-nb-okagree:hover{background:var(--navy-lift)!important}
+.termsfeed-com---palette-light .cc-nb-reject,
+.termsfeed-com---palette-light .cc-nb-changep{
+  background:transparent!important;color:var(--navy)!important;
+  border:2px solid var(--sand-deep)!important;
+}
+.termsfeed-com---palette-light .cc-nb-reject:hover,
+.termsfeed-com---palette-light .cc-nb-changep:hover{border-color:var(--navy)!important}
+.termsfeed-com---nb .cc-nb-text-urls-privacy{color:var(--navy)!important;font-weight:700!important}
+
+/* Preferences center */
+.termsfeed-com---pc-dialog .cc-pc-head-title-headline,
+.termsfeed-com---pc-dialog .cc-cp-body-content-entry-title{
+  font-family:var(--serif)!important;color:var(--navy)!important;
+}
+.termsfeed-com---pc-dialog .cc-cp-foot-save{
+  background:var(--gold)!important;color:var(--navy)!important;
+  font-weight:900!important;border-radius:var(--radius)!important;min-height:44px!important;
+}
+.termsfeed-com---pc-dialog .cc-cp-foot-save:hover{background:var(--gold-soft)!important}
 
 /* ---------- Reduced motion: final say ----------
    Must stay last in the file. The mobile band layout above lives in a max-width
