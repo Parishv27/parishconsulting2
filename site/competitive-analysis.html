@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Competitive Analysis | Parish Educational Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0a0a0a; --paper:#f6f4f0; --terracotta:#c45d3e; --accent:#c45d3e;
+  --accent-light:#e8a48e; --muted:#8a8580; --hairline:#d6d2cc; --card:#fffefa;
+  --shadow:rgba(10,10,10,.06);
+  --navy:#0A1F44; --gold:#C9A646; --sand:#EAE6DB; --slate:#5C768D;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+.container{max-width:900px;margin:0 auto;padding:0 2rem}
+
+/* ---- Cover ---- */
+header{padding:6rem 0 3rem;text-align:center;position:relative}
+header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--accent))}
+.badge{display:inline-block;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);font-weight:600;border:1px solid var(--accent);border-radius:100px;padding:.45rem 1.1rem;margin-bottom:1.6rem}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,6vw,4.2rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:1.1rem}
+h1 em{color:var(--accent);font-style:italic}
+.subtitle{font-size:1.02rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
+.meta-row{display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap;margin-top:2.2rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.meta-row b{display:block;color:var(--ink);font-weight:600;letter-spacing:.06em;text-transform:none;font-size:.85rem;margin-top:.25rem}
+.divider{width:60px;height:1px;background:var(--accent);margin:3.5rem auto}
+
+/* ---- Sections ---- */
+section{padding-bottom:4rem}
+.sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.6rem}
+.sec-num{font-family:'Instrument Serif',serif;font-size:2.6rem;color:var(--hairline);line-height:1}
+h2{font-family:'Instrument Serif',serif;font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:400;letter-spacing:-.01em}
+h3{font-family:'Instrument Serif',serif;font-size:1.35rem;font-weight:400;margin-bottom:.2rem}
+p{margin-bottom:1rem;font-size:.95rem}
+.lede{font-size:1.05rem;line-height:1.75}
+
+/* ---- Cards ---- */
+.card{background:var(--card);border:1px solid var(--hairline);border-left:4px solid var(--accent);border-radius:14px;padding:2rem 2.2rem;margin-bottom:1.6rem;transition:box-shadow .3s ease}
+.card:hover{box-shadow:0 12px 40px var(--shadow)}
+.card.navy{border-left-color:var(--navy)}
+.card.gold{border-left-color:var(--gold)}
+.card.slate{border-left-color:var(--slate)}
+.rank{font-family:'Instrument Serif',serif;font-size:2.4rem;color:var(--hairline);line-height:1;float:right;margin:-.4rem 0 0 1rem}
+.site-link{display:inline-block;font-size:.8rem;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-bottom:1rem;letter-spacing:.02em}
+.site-link:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.score-pill{display:inline-block;background:var(--sand);border-radius:100px;padding:.2rem .8rem;font-size:.72rem;font-weight:600;letter-spacing:.06em;margin-left:.6rem;vertical-align:middle;color:var(--navy)}
+
+/* swatches */
+.swatches{display:flex;gap:.5rem;margin:.2rem 0 1.2rem;flex-wrap:wrap}
+.sw{width:44px;height:44px;border-radius:8px;border:1px solid var(--hairline);position:relative}
+.sw span{position:absolute;bottom:-1.15rem;left:0;font-size:.55rem;color:var(--muted);letter-spacing:.04em}
+.swatches{padding-bottom:1.2rem}
+
+.kv{font-size:.9rem;margin-bottom:.7rem}
+.kv b{font-weight:600}
+.pros,.cons{font-size:.9rem;margin-bottom:.6rem;padding-left:1.4rem;position:relative}
+.pros::before{content:'+';position:absolute;left:0;color:#4a7c59;font-weight:700}
+.cons::before{content:'\2013';position:absolute;left:0;color:var(--terracotta);font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+.tag{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;background:var(--sand);color:var(--navy);border-radius:100px;padding:.3rem .75rem;font-weight:500}
+
+/* scorebars */
+.scores{margin-top:1.2rem;display:grid;grid-template-columns:1fr;gap:.45rem}
+.sbar{display:grid;grid-template-columns:150px 1fr 26px;align-items:center;gap:.7rem;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.track{height:5px;background:var(--sand);border-radius:100px;overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:100px}
+.sbar b{color:var(--ink);font-weight:600;text-align:right;font-size:.75rem}
+
+/* table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:14px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:620px}
+th,td{padding:.72rem .85rem;text-align:left;border-bottom:1px solid var(--hairline)}
+thead th{background:var(--sand);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:600}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.total td{font-weight:700;background:#faf8f4}
+td.num,th.num{text-align:center}
+
+/* connector */
+.connector{height:46px;display:flex;justify-content:center;align-items:center}
+.connector svg{height:100%}
+
+/* pattern list */
+.pattern{background:var(--card);border:1px solid var(--hairline);border-radius:14px;padding:1.6rem 1.8rem;margin-bottom:1rem;display:grid;grid-template-columns:44px 1fr;gap:1.2rem;align-items:start}
+.pattern .n{font-family:'Instrument Serif',serif;font-size:1.9rem;color:var(--accent);line-height:1}
+.pattern h4{font-size:.98rem;font-weight:600;margin-bottom:.35rem}
+.pattern p{font-size:.88rem;color:#3d3a36;margin:0}
+
+/* opportunity block */
+.opp{background:var(--navy);color:#eef2f9;border-radius:16px;padding:2.2rem 2.4rem;margin-bottom:1.2rem;border-left:4px solid var(--gold)}
+.opp h4{font-family:'Instrument Serif',serif;font-size:1.4rem;font-weight:400;color:var(--gold);margin-bottom:.6rem}
+.opp p{color:#c8d4e6;font-size:.92rem;margin:0}
+
+/* direction grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.mini{background:var(--card);border:1px solid var(--hairline);border-radius:14px;padding:1.5rem 1.6rem}
+.mini h4{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:.8rem}
+.mini ul{list-style:none;font-size:.87rem}
+.mini li{padding:.32rem 0;border-bottom:1px solid var(--hairline)}
+.mini li:last-child{border-bottom:none}
+
+footer{padding:3rem 0 4rem;text-align:center;border-top:1px solid var(--hairline);margin-top:2rem}
+footer .conf{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+@media (max-width:640px){
+  .container{padding:0 1.2rem}
+  header{padding:3.5rem 0 2rem}
+  .grid2{grid-template-columns:1fr}
+  .sbar{grid-template-columns:110px 1fr 24px}
+  .card{padding:1.5rem 1.4rem}
+  .meta-row{gap:1.4rem}
+}
+
+@media print{
+  body{background:#fff}
+  body::after{display:none}
+  .container{max-width:100%;padding:0 12mm}
+  @page{size:A4;margin:14mm}
+  .card,.pattern,.mini,.tbl-wrap,.opp{break-inside:avoid;page-break-inside:avoid;box-shadow:none}
+  section{break-inside:auto}
+  h2,h3{break-after:avoid}
+  .connector{display:none}
+  a{color:var(--accent)!important}
+  header{padding-top:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">Competitive Analysis</div>
+    <h1>Where a founder-led practice <em>wins</em> in K-12 consulting</h1>
+    <p class="subtitle">A market study of ten education consulting firms, scored across eight criteria, prepared to inform the launch of the Parish Educational Consulting website.</p>
+    <div class="meta-row">
+      <div>Prepared for<b>Parish Educational Consulting, LLC</b></div>
+      <div>Principal<b>Dr. Veronica Williams Parish</b></div>
+      <div>Date<b>August 16, 2026</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<div class="container">
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>Executive summary</h2></div>
+  <p class="lede">Parish Educational Consulting enters a market with no owned web presence at all. That is an advantage, not a deficit. There is no legacy design to unwind and no conflicting message to retire, so the launch site can be built directly against what the highest-scoring competitors are doing rather than around an inherited compromise.</p>
+  <p>Ten firms were evaluated and five were analyzed in depth. The strongest performer, New Leaders, scored 74 of 80. The weakest of the deep five, a solo practitioner site structurally identical to what Parish is about to launch, scored 54. The distance between those two numbers is almost entirely explained by three things: whether the site opens on the buyer's problem, whether proof is named and numbered on the page, and whether the human being doing the work is visible.</p>
+  <p>Three positions in this market are unoccupied. Not one of the ten firms publishes pricing. Not one of them names their methodology. And the firms that sell a single expert consistently fail to show that expert. Parish already holds all three assets: a complete five-tier pricing table, a proprietary Assess, Align, Accelerate model, and a high-resolution portrait of a doctorate-holding former principal. The recommendation of this report is to lead with all three.</p>
+</section>
+
+<div class="connector"><svg width="2" height="46" viewBox="0 0 2 46"><line x1="1" y1="0" x2="1" y2="46" stroke="#c45d3e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/></svg></div>
+
+<!-- 02 PROFILES -->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Competitor profiles</h2></div>
+  <p>Scored 1 to 10 across eight criteria, weighted equally, for a maximum of 80.</p>
+
+  <!-- 1 -->
+  <div class="card navy">
+    <span class="rank">01</span>
+    <h3>New Leaders <span class="score-pill">74 / 80</span></h3>
+    <a class="site-link" href="https://www.newleaders.org/" target="_blank" rel="noopener">newleaders.org</a>
+    <div class="swatches">
+      <div class="sw" style="background:#12294B"><span>#12294B</span></div>
+      <div class="sw" style="background:#E8722B"><span>#E8722B</span></div>
+      <div class="sw" style="background:#FFFFFF"><span>#FFFFFF</span></div>
+    </div>
+    <p class="kv"><b>Headline:</b> "New Leaders Is Redefining How Schools Are Led"</p>
+    <p class="kv"><b>Primary CTA:</b> "Explore Our Programs &amp; Services"</p>
+    <p class="kv"><b>Positioning:</b> Develops school leaders who remove barriers for "underestimated and underserved" students, backed by a claim to "the strongest evidence base of any education leadership program in the country."</p>
+    <p class="pros">Impact is a top-level navigation item, not a buried page.</p>
+    <p class="pros">Named alumni with cohort years and direct quotes carry the proof.</p>
+    <p class="pros">Documentary photography of real educators, not stock.</p>
+    <p class="cons">Institutional scale makes it feel like an organization, not a person you can hire.</p>
+    <p class="cons">No single face or named expert to build a relationship with.</p>
+    <div class="scores">
+      <div class="sbar"><span>Search visibility</span><div class="track"><div class="fill" style="width:100%"></div></div><b>10</b></div>
+      <div class="sbar"><span>Reputation</span><div class="track"><div class="fill" style="width:100%"></div></div><b>10</b></div>
+      <div class="sbar"><span>Visual design</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Mobile</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Content depth</span><div class="track"><div class="fill" style="width:100%"></div></div><b>10</b></div>
+      <div class="sbar"><span>Social proof</span><div class="track"><div class="fill" style="width:100%"></div></div><b>10</b></div>
+      <div class="sbar"><span>CTA strategy</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Page speed</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+    </div>
+    <div class="tags"><span class="tag">Principal pipeline</span><span class="tag">Equity language</span><span class="tag">Evidence base</span><span class="tag">Nonprofit scale</span></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card gold">
+    <span class="rank">02</span>
+    <h3>K12 Coalition <span class="score-pill">67 / 80</span></h3>
+    <a class="site-link" href="https://k12coalition.com/consulting/" target="_blank" rel="noopener">k12coalition.com</a>
+    <div class="swatches">
+      <div class="sw" style="background:#1B4E8C"><span>#1B4E8C</span></div>
+      <div class="sw" style="background:#3EA6DD"><span>#3EA6DD</span></div>
+      <div class="sw" style="background:#FFFFFF"><span>#FFFFFF</span></div>
+    </div>
+    <p class="kv"><b>Headline:</b> "Helping Schools Do The Work That Matters"</p>
+    <p class="kv"><b>Primary CTA:</b> "Connect with Us" / "Let's Connect"</p>
+    <p class="kv"><b>Positioning:</b> Opens on a threat statistic. "70% of school initiatives fail to achieve their desired outcomes." Positions itself as the research-backed antidote, staffed by people who held district and state-level roles.</p>
+    <p class="pros">Best conversion architecture in the study. The problem statistic in the first viewport is the most effective opening device in the category.</p>
+    <p class="pros">Named proof: Principal Nehemiah Thomas testimonial, and Promise Academy with "double-digit literacy and math gains."</p>
+    <p class="pros">Seven named consultants with real titles, which turns a firm into hireable humans.</p>
+    <p class="cons">Consulting is buried under "District Services," beneath four commercial product lines.</p>
+    <p class="cons">Visual identity is interchangeable with any edtech vendor.</p>
+    <div class="scores">
+      <div class="sbar"><span>Search visibility</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Reputation</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Visual design</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Mobile</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Content depth</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Social proof</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>CTA strategy</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Page speed</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+    </div>
+    <div class="tags"><span class="tag">Executive coaching</span><span class="tag">Named case study</span><span class="tag">Problem-first hero</span><span class="tag">B Corp</span></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card slate">
+    <span class="rank">03</span>
+    <h3>Creative Leadership Solutions <span class="score-pill">61 / 80</span></h3>
+    <a class="site-link" href="https://www.creativeleadership.net/solutions/k-12-education-consultant/" target="_blank" rel="noopener">creativeleadership.net</a>
+    <div class="swatches">
+      <div class="sw" style="background:#164A7B"><span>#164A7B</span></div>
+      <div class="sw" style="background:#4B9CD3"><span>#4B9CD3</span></div>
+      <div class="sw" style="background:#F4F7FA"><span>#F4F7FA</span></div>
+    </div>
+    <p class="kv"><b>Headline:</b> "K-12 Education Consulting"</p>
+    <p class="kv"><b>Subheadline:</b> "A System-Level Approach to Teaching, Learning, and Leadership"</p>
+    <p class="kv"><b>Primary CTA:</b> "Contact Us"</p>
+    <p class="pros">Deepest service taxonomy in the set. Fourteen topic areas, filterable by topic, format, school level, and audience.</p>
+    <p class="pros">Heavy resource library (books, podcast, courses, newsletter) does the organic search work.</p>
+    <p class="cons">Zero social proof on the money page. No testimonials, no logos, no statistics.</p>
+    <p class="cons">"Contact Us" promises the buyer nothing about what happens next.</p>
+    <p class="cons">Founder credibility never surfaces on the service page.</p>
+    <div class="scores">
+      <div class="sbar"><span>Search visibility</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Reputation</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Visual design</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Mobile</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Content depth</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Social proof</span><div class="track"><div class="fill" style="width:40%"></div></div><b>4</b></div>
+      <div class="sbar"><span>CTA strategy</span><div class="track"><div class="fill" style="width:60%"></div></div><b>6</b></div>
+      <div class="sbar"><span>Page speed</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+    </div>
+    <div class="tags"><span class="tag">14 service areas</span><span class="tag">Train-the-trainer</span><span class="tag">Content library</span><span class="tag">No on-page proof</span></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card navy">
+    <span class="rank">04</span>
+    <h3>Zeal Education Group <span class="score-pill">60 / 80</span></h3>
+    <a class="site-link" href="https://www.zeal-ed.com/" target="_blank" rel="noopener">zeal-ed.com</a>
+    <div class="swatches">
+      <div class="sw" style="background:#0F2B46"><span>#0F2B46</span></div>
+      <div class="sw" style="background:#E4572E"><span>#E4572E</span></div>
+      <div class="sw" style="background:#F7F5F2"><span>#F7F5F2</span></div>
+    </div>
+    <p class="kv"><b>Headline:</b> "Outside View. Inside Perspective."</p>
+    <p class="kv"><b>Positioning:</b> "Not career consultants. 100+ superintendents, principals, and thought leaders solving your district's most vexing challenges."</p>
+    <p class="pros">"Not career consultants" is the sharpest differentiator in the entire niche, and it is exactly the claim Parish can make more credibly than any national firm.</p>
+    <p class="pros">Expert cards carry photo, doctoral credential, and pill-shaped expertise tags. Instantly scannable.</p>
+    <p class="pros">Bios name specific districts and specific numbers: graduation rates above 98 percent, a K-12 curriculum audit for Hartford Public Schools.</p>
+    <p class="cons">No pricing, no engagement structure, no single clear next step.</p>
+    <p class="cons">A bench of 100+ experts dilutes any individual relationship.</p>
+    <p class="cons">Blocks automated crawling, which suppresses discoverability. This profile was assembled from indexed content rather than a full page render.</p>
+    <div class="scores">
+      <div class="sbar"><span>Search visibility</span><div class="track"><div class="fill" style="width:60%"></div></div><b>6</b></div>
+      <div class="sbar"><span>Reputation</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+      <div class="sbar"><span>Visual design</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Mobile</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Content depth</span><div class="track"><div class="fill" style="width:90%"></div></div><b>9</b></div>
+      <div class="sbar"><span>Social proof</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>CTA strategy</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+      <div class="sbar"><span>Page speed</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+    </div>
+    <div class="tags"><span class="tag">School turnaround</span><span class="tag">Practitioner bench</span><span class="tag">Executive search</span><span class="tag">Expertise tags</span></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card gold">
+    <span class="rank">05</span>
+    <h3>Advanced Collaborative Solutions <span class="score-pill">54 / 80</span></h3>
+    <a class="site-link" href="https://www.steveventura.com/services/coaching-and-consulting/" target="_blank" rel="noopener">steveventura.com</a>
+    <div class="swatches">
+      <div class="sw" style="background:#1A2E4F"><span>#1A2E4F</span></div>
+      <div class="sw" style="background:#5B8DB8"><span>#5B8DB8</span></div>
+      <div class="sw" style="background:#FFFFFF"><span>#FFFFFF</span></div>
+    </div>
+    <p class="kv"><b>Headline:</b> "Coaching &amp; Consulting"</p>
+    <p class="kv"><b>Subheadline:</b> "Tailored Support to Elevate Instruction and Drive Student Success"</p>
+    <p class="kv"><b>Primary CTA:</b> "Request a Consultation"</p>
+    <p class="kv"><b>Why it matters most:</b> This is the closest structural analogue to Parish. A named individual expert selling coaching and professional development to schools. Its failures are the ones Parish is most likely to repeat.</p>
+    <p class="pros">"Request a Consultation" is materially better than "Contact Us" because it names the deliverable.</p>
+    <p class="pros">"Job-embedded, non-evaluative support" is excellent buyer language. It neutralizes a principal's fear that a consultant is really an evaluator.</p>
+    <p class="cons">The brand is built around a person, and the person never appears. No photo, no bio, no credentials on the service page.</p>
+    <p class="cons">Weakest visual design and mobile experience in the deep five.</p>
+    <p class="cons">Proof is teased and linked rather than shown.</p>
+    <div class="scores">
+      <div class="sbar"><span>Search visibility</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+      <div class="sbar"><span>Reputation</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+      <div class="sbar"><span>Visual design</span><div class="track"><div class="fill" style="width:60%"></div></div><b>6</b></div>
+      <div class="sbar"><span>Mobile</span><div class="track"><div class="fill" style="width:60%"></div></div><b>6</b></div>
+      <div class="sbar"><span>Content depth</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+      <div class="sbar"><span>Social proof</span><div class="track"><div class="fill" style="width:50%"></div></div><b>5</b></div>
+      <div class="sbar"><span>CTA strategy</span><div class="track"><div class="fill" style="width:70%"></div></div><b>7</b></div>
+      <div class="sbar"><span>Page speed</span><div class="track"><div class="fill" style="width:80%"></div></div><b>8</b></div>
+    </div>
+    <div class="tags"><span class="tag">Founder-led</span><span class="tag">PLC coaching</span><span class="tag">Job-embedded</span><span class="tag">Face missing</span></div>
+  </div>
+</section>
+
+<div class="connector"><svg width="2" height="46" viewBox="0 0 2 46"><line x1="1" y1="0" x2="1" y2="46" stroke="#c45d3e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/></svg></div>
+
+<!-- 03 COMPARISON -->
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Scored side by side</h2></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th class="num">New Leaders</th>
+          <th class="num">K12 Coalition</th>
+          <th class="num">Creative Leadership</th>
+          <th class="num">Zeal</th>
+          <th class="num">Adv. Collaborative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Search visibility</td><td class="num">10</td><td class="num">8</td><td class="num">9</td><td class="num">6</td><td class="num">7</td></tr>
+        <tr><td>Review quality / reputation</td><td class="num">10</td><td class="num">8</td><td class="num">9</td><td class="num">7</td><td class="num">8</td></tr>
+        <tr><td>Visual design</td><td class="num">9</td><td class="num">9</td><td class="num">8</td><td class="num">8</td><td class="num">6</td></tr>
+        <tr><td>Mobile responsive</td><td class="num">9</td><td class="num">9</td><td class="num">8</td><td class="num">8</td><td class="num">6</td></tr>
+        <tr><td>Content depth</td><td class="num">10</td><td class="num">8</td><td class="num">9</td><td class="num">9</td><td class="num">7</td></tr>
+        <tr><td>Social proof</td><td class="num">10</td><td class="num">9</td><td class="num">4</td><td class="num">8</td><td class="num">5</td></tr>
+        <tr><td>CTA strategy</td><td class="num">9</td><td class="num">9</td><td class="num">6</td><td class="num">7</td><td class="num">7</td></tr>
+        <tr><td>Page speed</td><td class="num">7</td><td class="num">7</td><td class="num">8</td><td class="num">7</td><td class="num">8</td></tr>
+        <tr class="total"><td>Total (of 80)</td><td class="num">74</td><td class="num">67</td><td class="num">61</td><td class="num">60</td><td class="num">54</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:1rem;font-size:.85rem;color:var(--muted)">Five further firms were evaluated and set aside: Achievement Network, TNTP Impact Consulting, Education Elements, Center for Educational Effectiveness, and Distinguished Educational Consulting. The first three operate at a scale and price point Parish will not bid against. CEE is regionally locked to the Pacific Northwest.</p>
+</section>
+
+<div class="connector"><svg width="2" height="46" viewBox="0 0 2 46"><line x1="1" y1="0" x2="1" y2="46" stroke="#c45d3e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/></svg></div>
+
+<!-- 04 PATTERNS -->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>Patterns of the top 10%</h2></div>
+
+  <div class="pattern"><div class="n">1</div><div><h4>They open on the buyer's problem, not on their own name</h4><p>K12 Coalition opens with "70% of school initiatives fail." The low scorers open with a category label such as "K-12 Education Consulting," which tells a superintendent nothing they did not already know. The current flyer opens with the company name.</p></div></div>
+
+  <div class="pattern"><div class="n">2</div><div><h4>Proof is named, numbered, and sits on the money page</h4><p>Promise Academy with double-digit gains. Graduation rates above 98 percent. Providence Public Schools. The two firms with no on-page proof are the two lowest social-proof scorers despite strong service depth.</p></div></div>
+
+  <div class="pattern"><div class="n">3</div><div><h4>The practitioner credential is stated in plain words</h4><p>Zeal says "not career consultants." K12 Coalition says its people came from district and state-level roles. This is the axis on which a boutique founder-led firm beats a national brand, and the winners say it outright rather than implying it through a bio.</p></div></div>
+
+  <div class="pattern"><div class="n">4</div><div><h4>The call to action names the deliverable</h4><p>"Request a Consultation" and "Connect with Us" outperform "Contact Us." The strongest sites tell the buyer what they receive and what happens next.</p></div></div>
+
+  <div class="pattern"><div class="n">5</div><div><h4>Services are organized by district problem, not by consultant capability</h4><p>Top sites let a buyer self-identify. "Our literacy scores are flat." "We cannot keep principals." Then they route to the matching offer. Weaker sites present an undifferentiated capability list.</p></div></div>
+</section>
+
+<div class="connector"><svg width="2" height="46" viewBox="0 0 2 46"><line x1="1" y1="0" x2="1" y2="46" stroke="#c45d3e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/></svg></div>
+
+<!-- 05 SEO -->
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><h2>Search landscape</h2></div>
+  <p>The national firms own the broad head terms and will not be displaced by a new domain. The opening is in the long tail, in the two places where large firms deliberately stay silent: cost, and geography.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Target</th><th>Difficulty</th><th>Why it is winnable</th></tr></thead>
+      <tbody>
+        <tr><td>educational consultant Mississippi</td><td>Low</td><td>Almost no optimized local competition in the 662 service area</td></tr>
+        <tr><td>school improvement consultant for districts</td><td>Medium</td><td>Contested by national brands, but a services page can rank on specificity</td></tr>
+        <tr><td>how much does an education consultant cost</td><td>Low</td><td>Zero of ten competitors publish pricing. A rates page owns this outright</td></tr>
+        <tr><td>principal coaching cycle cost per month</td><td>Low</td><td>Same gap. Transactional intent, and the buyer arrives pre-qualified</td></tr>
+        <tr><td>Science of Reading implementation support</td><td>Medium</td><td>High current district demand, and it is an explicit Parish capability</td></tr>
+        <tr><td>instructional rounds and walkthrough consultant</td><td>Low</td><td>Named product in the flyer. Very little competing content</td></tr>
+        <tr><td>correctional education consulting</td><td>Very low</td><td>Genuinely rare specialization. Effectively uncontested</td></tr>
+        <tr><td>dropout prevention and credit recovery consultant</td><td>Low</td><td>Alternative education is thin ground across the whole competitor set</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:1rem"><b>Gap to close:</b> there is no owned domain, no Google Business Profile, and no schema markup anywhere in the client's current footprint. The only indexed commercial listing prices Dr. Parish as an hourly tutor, which directly contradicts a $2,500 to $4,500 per month partnership offer. A branded site with ProfessionalService schema becomes the canonical result and resolves that conflict.</p>
+</section>
+
+<div class="connector"><svg width="2" height="46" viewBox="0 0 2 46"><line x1="1" y1="0" x2="1" y2="46" stroke="#c45d3e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/></svg></div>
+
+<!-- 06 OPPORTUNITY -->
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><h2>Three unoccupied positions</h2></div>
+
+  <div class="opp">
+    <h4>01. Publish the pricing</h4>
+    <p>Zero of ten firms publish rates. Parish already has a defensible five-tier table. Publishing it pre-qualifies every inquiry, removes the affordability objection before it forms, captures long-tail cost search, and signals confidence rather than exposure.</p>
+  </div>
+
+  <div class="opp">
+    <h4>02. Show the human being</h4>
+    <p>New Leaders and Creative Leadership have no face. Zeal has a hundred, which amounts to the same thing. Advanced Collaborative has a name but shows no portrait. Parish has one high-resolution studio portrait of a doctorate-holding former principal and district leader. No competitor in this set is contesting that ground.</p>
+  </div>
+
+  <div class="opp">
+    <h4>03. Name the methodology</h4>
+    <p>Not one competitor names their process. Parish has "Assess, Align, Accelerate," a proprietary and memorable framework. It deserves a top-level navigation entry and a full scroll-animated section, not three small boxes on page one of a PDF.</p>
+  </div>
+</section>
+
+<div class="connector"><svg width="2" height="46" viewBox="0 0 2 46"><line x1="1" y1="0" x2="1" y2="46" stroke="#c45d3e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/></svg></div>
+
+<!-- 07 DIRECTION -->
+<section>
+  <div class="sec-head"><span class="sec-num">07</span><h2>Recommended design direction</h2></div>
+  <p>Nine of ten competitor sites use cold blue and white. The palette inherited from the flyer, deep navy with antique gold on warm ivory, is the most distinctive in the category by a wide margin. The recommendation is to push it harder on the web than on the flyer, not to tone it down.</p>
+
+  <div class="grid2">
+    <div class="mini">
+      <h4>Palette (carried from the flyer)</h4>
+      <ul>
+        <li><b>#0A1F44</b> Navy, primary surface</li>
+        <li><b>#C9A646</b> Antique gold, accent and pricing</li>
+        <li><b>#F8F6F0</b> Warm ivory, page ground</li>
+        <li><b>#EAE6DB</b> Sand, card fills</li>
+        <li><b>#5C768D</b> Slate blue, tertiary</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>Typography</h4>
+      <ul>
+        <li><b>Noto Serif</b> display and headings</li>
+        <li><b>Lato</b> body and interface</li>
+        <li>Exact flyer match, both on Google Fonts</li>
+        <li>Serif carries authority. Every competitor uses sans-serif headings, so this alone differentiates</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>Structure</h4>
+      <ul>
+        <li>Problem-first hero, then the founder</li>
+        <li>Assess / Align / Accelerate as a scroll-driven section</li>
+        <li>Five service pillars, framed as district problems</li>
+        <li>Published pricing table</li>
+        <li>Consultation request as the single conversion goal</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>Motion</h4>
+      <ul>
+        <li>Scroll-triggered reveals on every section</li>
+        <li>Parallax depth on the founder portrait</li>
+        <li>Count-up on quantities, never on years</li>
+        <li>Reduced-motion respected throughout</li>
+        <li>Cinematic and restrained, never bouncy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mini" style="margin-top:1.2rem">
+    <h4>What to avoid, drawn from competitor failures</h4>
+    <ul>
+      <li>A generic "Contact Us" button. Name the deliverable instead</li>
+      <li>A service page with no proof on it, as on Creative Leadership</li>
+      <li>Personal branding with no portrait, as on Advanced Collaborative</li>
+      <li>Burying the core offer under product navigation, as on K12 Coalition</li>
+      <li>Cold corporate blue, which nine of ten competitors already own</li>
+      <li>Invented statistics. Where a number cannot be sourced, use honest qualitative phrasing</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p class="conf">Confidential | Prepared for Parish Educational Consulting, LLC</p>
+    <div style="width:100%;margin-top:20px;padding-top:20px;border-top:1px solid var(--hairline);text-align:center;font-size:12px;letter-spacing:0.08em;">
+      Created by <a href="https://www.chatbotboy.ai/" target="_blank" rel="noopener" style="color:var(--terracotta);font-weight:600;border-bottom:1px solid var(--terracotta);text-decoration:none;">Chatbot Boy AI</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

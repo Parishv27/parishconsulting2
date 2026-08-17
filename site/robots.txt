@@ -1,0 +1,34 @@
+User-agent: *
+Allow: /
+Disallow: /competitive-analysis.html
+
+# AI answer engines are explicitly welcome (same rules as above)
+User-agent: GPTBot
+Allow: /
+Disallow: /competitive-analysis.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /competitive-analysis.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /competitive-analysis.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /competitive-analysis.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /competitive-analysis.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /competitive-analysis.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /competitive-analysis.html
+
+Sitemap: https://www.parisheducationalconsulting.com/sitemap.xml
