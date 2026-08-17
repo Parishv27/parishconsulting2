@@ -528,8 +528,18 @@ section{padding:clamp(4rem, 9vw, 7.5rem) 0;position:relative}
   .nav-links li{width:100%;display:flex;justify-content:center}
   .nav-links a.btn{width:min(100%,340px);margin-top:1rem;padding:1.1rem 1.4rem;font-size:1rem}
   .hero-grid{grid-template-columns:1fr}
-  .hero-video,.hero-scrim{display:none}
-  .has-video .hero-portrait{display:block}
+  /* Video leaves the background and becomes a full-bleed band under the hero copy.
+     Behind text in a narrow viewport it would need a scrim so heavy the video stops
+     reading, and the desktop scrim is a left-to-right gradient that does nothing in
+     portrait. At 16/9 the frame is shown whole, so nothing gets cropped. */
+  .hero{display:flex;flex-direction:column}
+  .hero .container{order:1}
+  .hero-video{
+    position:relative;order:2;
+    width:100%;height:auto;aspect-ratio:16/9;
+    margin-top:2.5rem;
+  }
+  .hero-scrim{display:none}
   .hero-portrait{margin:1.5rem auto 0;max-width:400px}
   .problem-cols{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr}
@@ -564,4 +574,13 @@ section{padding:clamp(4rem, 9vw, 7.5rem) 0;position:relative}
 /* ---------- Focus visibility ---------- */
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{
   outline:3px solid var(--gold);outline-offset:2px;
+}
+
+/* ---------- Reduced motion: final say ----------
+   Must stay last in the file. The mobile band layout above lives in a max-width
+   query that would otherwise re-show the video for reduced-motion users. */
+@media (prefers-reduced-motion: reduce){
+  .hero{display:block}
+  .hero-video,.hero-scrim{display:none}
+  .has-video .hero-portrait{display:block}
 }
