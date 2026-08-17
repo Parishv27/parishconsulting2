@@ -534,18 +534,39 @@ section{padding:clamp(4rem, 9vw, 7.5rem) 0;position:relative}
   .nav-links li{width:100%;display:flex;justify-content:center}
   .nav-links a.btn{width:min(100%,340px);margin-top:1rem;padding:1.1rem 1.4rem;font-size:1rem}
   .hero-grid{grid-template-columns:1fr}
-  /* Video leaves the background and becomes a full-bleed band under the hero copy.
-     Behind text in a narrow viewport it would need a scrim so heavy the video stops
-     reading, and the desktop scrim is a left-to-right gradient that does nothing in
-     portrait. At 16/9 the frame is shown whole, so nothing gets cropped. */
-  .hero{display:flex;flex-direction:column}
-  .hero .container{order:1}
-  .hero-video{
-    position:relative;order:2;
-    width:100%;height:auto;aspect-ratio:16/9;
-    margin-top:2.5rem;
+  /* Full-bleed video behind the hero copy. A landscape frame cropped to portrait
+     needs two things to work: the crop centered on the subject (she sits at 60%
+     across the frame, measured, not guessed), and a scrim heavy enough to carry
+     type. The scrim is navy rather than black so this reads as the same dark
+     treatment already used by the Impact Model and Contact sections. */
+  .hero{
+    display:flex;flex-direction:column;justify-content:center;
+    min-height:88vh;
   }
-  .hero-scrim{display:none}
+  .hero-video{
+    position:absolute;inset:0;margin:0;
+    width:100%;height:100%;aspect-ratio:auto;
+    object-fit:cover;object-position:60% center;
+  }
+  .hero-scrim{
+    display:block;
+    background:linear-gradient(180deg,
+      rgba(10,31,68,.74) 0%,
+      rgba(10,31,68,.68) 42%,
+      rgba(10,31,68,.90) 100%);
+  }
+  /* Type inverts to the dark-section palette */
+  .hero .eyebrow{color:var(--gold-soft)}
+  .hero h1{color:var(--paper)}
+  .hero .lede{color:var(--pale)}
+  .hero-meta{color:var(--pale)}
+  .hero-meta a{color:var(--paper);border-bottom-color:rgba(222,193,126,.45)}
+  .hero-meta a:hover{border-bottom-color:var(--gold)}
+  /* Navy on navy would vanish, so the primary CTA takes the gold treatment */
+  .hero-ctas .btn-primary{background:var(--gold);color:var(--navy)}
+  .hero-ctas .btn-primary:hover{background:var(--gold-soft)}
+  .hero-ctas .btn-ghost{color:var(--paper);border-color:rgba(248,246,240,.45)}
+  .hero-ctas .btn-ghost:hover{border-color:var(--paper)}
   .hero-portrait{margin:1.5rem auto 0;max-width:400px}
   .problem-cols{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr}
@@ -665,7 +686,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    Must stay last in the file. The mobile band layout above lives in a max-width
    query that would otherwise re-show the video for reduced-motion users. */
 @media (prefers-reduced-motion: reduce){
-  .hero{display:block}
+  .hero{display:block;min-height:0}
   .hero-video,.hero-scrim{display:none}
   .has-video .hero-portrait{display:block}
+  /* Without the video there is no dark scrim, so the inverted mobile type must
+     go back to the light-background palette or it would be ivory on ivory. */
+  .hero .eyebrow{color:var(--gold)}
+  .hero h1{color:var(--navy)}
+  .hero .lede{color:var(--muted)}
+  .hero-meta{color:var(--muted)}
+  .hero-meta a{color:var(--navy);border-bottom-color:var(--sand-deep)}
+  .hero-ctas .btn-primary{background:var(--navy);color:var(--paper)}
+  .hero-ctas .btn-ghost{color:var(--navy);border-color:var(--sand-deep)}
 }
