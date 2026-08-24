@@ -16,6 +16,8 @@ site/                               The publish directory
   robots.txt / sitemap.xml
   css/style.css                     All styles, design tokens at the top
   js/main.js                        Nav drawer, reveals, GSAP, form handling
+api/contact.js                      Serverless function: validates + sends via Resend
+package.json                        Declares the resend dependency for the function
   assets/                           Self-hosted logo set, portrait, icons, OG image
 ```
 
@@ -24,8 +26,13 @@ site/                               The publish directory
 **Netlify:** drag the project folder into Netlify, or connect the repo. `netlify.toml`
 already points the publish directory at `site/`.
 
-**Vercel:** add a `vercel.json` with `{ "outputDirectory": "site" }`, or set the output
-directory to `site` in project settings.
+**Vercel:** `vercel.json` already sets `outputDirectory` to `site`. The `api/`
+directory at the repo root is picked up automatically as a Serverless Function, so
+`/api/contact` is live on the same domain as the site. This is the deploy target.
+
+**Netlify note:** `netlify.toml` publishes `site/` only. The contact form's
+`/api/contact` endpoint is a Vercel Function and will not exist on Netlify without
+being ported to a Netlify Function first.
 
 **Local preview:**
 
@@ -34,16 +41,58 @@ cd site
 python -m http.server 8765
 ```
 
+## Contact form
+
+The consultation form posts JSON to `/api/contact` (`api/contact.js`). That function
+validates the submission, drops anything that fills the hidden honeypot field, and
+hands the rest to Resend for delivery. The reply-to is set to the address the visitor
+typed, so replying in the inbox reaches them directly.
+
+### Environment variables
+
+Set these on the Vercel project (Settings -> Environment Variables), for Production,
+Preview, and Development:
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `RESEND_API_KEY` | Yes | Resend API key, starts with `re_`. Without it the endpoint returns an error and sends nothing. |
+| `CONTACT_TO_EMAIL` | No | Where requests are delivered. Defaults to `parisheducationalconsultingllc@gmail.com`. |
+| `CONTACT_FROM_EMAIL` | No | The From address. Must be on a domain verified in Resend. Defaults to `onboarding@resend.dev`. |
+
+### The sending domain
+
+Resend will not send from an arbitrary address. There are two options:
+
+1. **Verified domain (what production needs).** Add the site's domain in Resend, put the
+   DNS records it gives you on that domain, then set `CONTACT_FROM_EMAIL` to something
+   like `website@yourdomain.com`. Mail then reaches any recipient.
+2. **`onboarding@resend.dev` (testing only).** This is the default. Resend only delivers
+   from it to the email address that owns the Resend account, so it is useful for
+   confirming the wiring works and nothing more.
+
+The `To` address is unrelated to this and can stay a Gmail address either way.
+
+### Local development
+
+`RESEND_API_KEY` is read from the environment, so a local run needs it too:
+
+```bash
+npm install
+RESEND_API_KEY=re_your_key npx vercel dev
+```
+
+Plain `python -m http.server` serves the static site but not `/api/contact`; the form
+will report that it could not reach the server.
+
 ## Before launch checklist
 
 1. **Domain.** Replace `https://www.parisheducationalconsulting.com/` with the real domain in:
    `site/index.html` (canonical + OG tags + both JSON-LD blocks), `site/sitemap.xml`,
    `site/robots.txt`.
-2. **Form.** Ships as a `mailto:` compose (opens the visitor's email app, pre-filled).
-   To capture leads server-side instead, use Formspree: set
-   `action="https://formspree.io/f/YOUR_ID" method="POST"` on `#consult-form` in
-   `index.html` and delete the `consult-form` submit handler in `js/main.js`.
-   On Netlify you can instead add `data-netlify="true"` to the form tag.
+2. **Form.** Posts to `/api/contact`, which sends the submission through Resend to
+   the practice inbox. It needs `RESEND_API_KEY` set on the Vercel project and a
+   verified sending domain — see **Contact form** below. Until both are in place the
+   form shows an error rather than sending.
 3. **Email.** The site ships with the Gmail address from the flyer. A domain mailbox
    (e.g. `hello@parisheducationalconsulting.com`) is strongly recommended before print
    materials reference the site.

@@ -829,32 +829,35 @@
       </div>
       <div class="form-card reveal reveal-d2">
         <h3>Request a Consultation</h3>
-        <!-- FORM WIRING: ships as a mailto compose. To switch to Formspree, replace the JS
-             submit handler by setting: action="https://formspree.io/f/YOUR_ID" method="POST"
-             and removing the preventDefault in js/main.js. See README. -->
-        <form id="consult-form" novalidate>
+        <!-- FORM WIRING: posts JSON to /api/contact, which sends the request through
+             Resend to the practice inbox. Validation, the sending state and the
+             confirmation all live in the submit handler in js/main.js. See README. -->
+        <form id="consult-form" method="post" action="/api/contact" novalidate>
           <div class="form-split">
             <div class="form-row">
               <label for="f-name">Name</label>
-              <input type="text" id="f-name" name="name" autocomplete="name" required>
+              <input type="text" id="f-name" name="name" autocomplete="name" maxlength="120" required aria-describedby="e-name">
+              <p class="field-error" id="e-name" hidden></p>
             </div>
             <div class="form-row">
               <label for="f-role">Role</label>
-              <input type="text" id="f-role" name="role" placeholder="Superintendent, Principal...">
+              <input type="text" id="f-role" name="role" placeholder="Superintendent, Principal..." maxlength="120">
             </div>
           </div>
           <div class="form-row">
             <label for="f-district">District or School</label>
-            <input type="text" id="f-district" name="district" autocomplete="organization" required>
+            <input type="text" id="f-district" name="district" autocomplete="organization" maxlength="200" required aria-describedby="e-district">
+            <p class="field-error" id="e-district" hidden></p>
           </div>
           <div class="form-split">
             <div class="form-row">
               <label for="f-email">Email</label>
-              <input type="email" id="f-email" name="email" autocomplete="email" required>
+              <input type="email" id="f-email" name="email" autocomplete="email" maxlength="254" required aria-describedby="e-email">
+              <p class="field-error" id="e-email" hidden></p>
             </div>
             <div class="form-row">
               <label for="f-phone">Phone</label>
-              <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel" maxlength="40">
             </div>
           </div>
           <div class="form-row">
@@ -870,10 +873,19 @@
           </div>
           <div class="form-row">
             <label for="f-message">Message</label>
-            <textarea id="f-message" name="message" placeholder="Where has progress stalled?"></textarea>
+            <textarea id="f-message" name="message" placeholder="Where has progress stalled?" maxlength="4000"></textarea>
           </div>
-          <button type="submit" class="btn btn-gold">Send Consultation Request <span class="arrow">&rarr;</span></button>
-          <p class="form-note">Submitting opens your email app with the request pre-filled.<br>Prefer to talk first? Call <a href="tel:+16628226283">(662) 822-6283</a>.</p>
+          <!-- Honeypot: hidden from people, tempting to bots. A filled value is dropped
+               server-side. Not display:none, which some bots skip. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="f-website">Do not fill this in</label>
+            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-gold" id="consult-submit">
+            <span class="btn-label">Send Consultation Request</span> <span class="arrow">&rarr;</span>
+          </button>
+          <p class="form-status" id="consult-status" role="status" aria-live="polite" hidden></p>
+          <p class="form-note">We reply to every request, usually within two business days.<br>Prefer to talk first? Call <a href="tel:+16628226283">(662) 822-6283</a>.</p>
         </form>
       </div>
     </div>
