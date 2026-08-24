@@ -31,4 +31,4 @@ User-agent: Google-Extended
 Allow: /
 Disallow: /competitive-analysis.html
 
-Sitemap: https://www.parisheducationalconsulting.com/sitemap.xml
+Sitemap: https://www.parisheducationalconsulting.net/sitemap.xml

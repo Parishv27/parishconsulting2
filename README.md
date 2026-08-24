@@ -86,15 +86,18 @@ will report that it could not reach the server.
 
 ## Before launch checklist
 
-1. **Domain.** Replace `https://www.parisheducationalconsulting.com/` with the real domain in:
-   `site/index.html` (canonical + OG tags + both JSON-LD blocks), `site/sitemap.xml`,
-   `site/robots.txt`.
+1. **Domain.** DONE. The live domain is `https://www.parisheducationalconsulting.net/`,
+   and the canonical tag, OG tags, JSON-LD, `site/sitemap.xml`, and `site/robots.txt`
+   all name it as of 2026-08-24. If the domain ever changes again, those are the files
+   to update — the string appears in `site/index.html` (canonical, `og:url`, `og:image`,
+   and the schema `url` / `logo` / `image` / founder `@id` values), `site/sitemap.xml`,
+   and `site/robots.txt`.
 2. **Form.** Posts to `/api/contact`, which sends the submission through Resend to
    the practice inbox. It needs `RESEND_API_KEY` set on the Vercel project and a
    verified sending domain — see **Contact form** below. Until both are in place the
    form shows an error rather than sending.
 3. **Email.** The site ships with the Gmail address from the flyer. A domain mailbox
-   (e.g. `hello@parisheducationalconsulting.com`) is strongly recommended before print
+   (e.g. `hello@parisheducationalconsulting.net`) is strongly recommended before print
    materials reference the site.
 4. **Testimonial.** Section 10 currently shows Dr. Parish's own closing line as a pull
    quote. When the first district testimonial arrives, swap the quote and attribution
